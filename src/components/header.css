@@ -1,0 +1,53 @@
+header {
+    height: 100px;
+    margin-bottom: 20px;
+    color: black;
+}
+
+header nav ul {
+    display: flex;
+}
+
+nav ul li {
+    margin: 0 10px;
+}
+
+nav li a {
+    font-weight: 600;
+    font-family: cursive;
+    text-decoration: none;
+}
+
+nav li:hover {
+    text-shadow: 3px 4px 12px #558abb;
+    transition: 180ms ease-in-out;
+}
+
+.switcherWrap {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 10px;
+}
+
+.switcher {
+    width: 72px;
+}
+
+.switcher img { 
+    width: 36px;
+    height: 36px;
+}
+
+.switcherWrap img:hover {
+    transform: scale(1.1);
+    transition: 150ms ease-in-out;
+}
+
+.switcher dayIcon {
+    background-color: blue;
+    border-radius: 10%;
+}
+
+.switcher img:hover{
+    cursor: pointer;
+}

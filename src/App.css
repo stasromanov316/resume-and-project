@@ -1,0 +1,65 @@
+* {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  outline: none;
+  font-family: 'Proxima Nova', Roboto, system-ui, Tahoma, sans-serif;
+  box-sizing: border-box;
+}
+
+.App {
+  max-width: 1200px;
+  width: 95%;
+  margin: 0px auto;
+}
+
+
+/*  dark theme css >>>  */
+.dark {
+  background-color: black;
+}
+
+.dark header {
+  color: #D8E6F3;
+}
+
+.dark td:first-child, .dark td {
+  border-color: black;
+  background-color: #ddE7;
+  color: beige;
+}
+.dark .about img {
+  border: 3px solid burlywood;
+}
+
+.dark h3 {
+  color: aliceblue;
+}
+
+.dark .about__workDescr p {
+  color: beige;
+  background-color: black;
+}
+
+.dark footer p {
+  color: beige;
+}
+
+/*  <<< dark theme css */
+
+/* responsive >> */
+
+@media (max-width: 767px){
+  .about {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-content: stretch;
+  }
+
+  .about__tableDescr {
+    margin-top: 10px;
+  }
+}
+
+/* << responsive */

@@ -1,0 +1,52 @@
+.about {
+    display: flex;
+    align-items: center;
+  }
+  
+  .about img {
+    border: 3px solid white;
+    width: 275px;
+    border-radius: 50%;
+    margin: 5px 25px;
+  }
+  
+  .about__workDescr h3 {
+    padding: 0 15px;
+    margin: 15px 0;
+    text-shadow: 1px 1px 4px #558abb;
+  }
+  
+  .about__workDescr p {
+    background-color: #D8E6F3;
+    color: black;
+    text-shadow: 2px 2px 9px #558abb;
+    padding: 10px 20px 15px 10px; 
+    margin: 5px;
+    width: max-content;
+    border-radius: 10px;
+    max-width: 100%;
+  }
+  
+  /* table css */
+  table {
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+    font-size: 14px;
+    border-collapse: collapse;
+    text-align: center;
+  }
+
+  td:first-child {
+    background: #AFCDE7;
+    color: white;
+    padding: 10px 20px;
+    text-align: left;
+  }
+
+  td {
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    border-color: white;
+    background: #D8E6F3;
+    padding: 10px;
+    border-radius: 10px
+  }
