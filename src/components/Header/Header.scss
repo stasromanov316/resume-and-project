@@ -1,0 +1,50 @@
+header {
+    height: 100px;
+    margin-bottom: 20px;
+    color: black;
+    
+    nav {
+        ul {
+            display: flex;
+
+            li {
+                margin: 0 10px;
+
+                &:hover {
+                    text-shadow: 3px 4px 12px #558abb;
+                    transition: 180ms ease-in-out;
+                }
+            }
+
+            li a {
+                font-weight: 600;
+                font-family: cursive;
+                text-decoration: none;
+            }
+        }
+    }
+}
+
+.switcherWrap {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 10px;
+
+    img:hover {
+        transform: scale(1.1);
+        transition: 150ms ease-in-out;
+    }
+}
+
+.switcher {
+    width: 72px;
+
+    img { 
+        width: 36px;
+        height: 36px;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
