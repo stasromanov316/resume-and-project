@@ -1,23 +1,18 @@
+import React from 'react';
+import Layout from './components/Layout/Layout';
+import ThemeContext from './context';
+
 import './App.scss';
 
-import Header from './components/Header/Header';
-import Footer from './components/Footer/Footer';
-import About from './pages/About/About';
-import CurrencyRate from './pages/CurrencyRate/CurrencyRate';
-import { Route, Routes } from 'react-router-dom';
-
 function App() {
+  const {theme} = React.useContext(ThemeContext);
+
   return (
-    <div className="wrapper">
-      <div className="App">
-        <Header />
-        <div className="content">
-          <Routes>
-            <Route path="/" element={<About />} exact />
-            <Route path="/rate" element={<CurrencyRate />} exact />
-          </Routes>
+    <div className="wrapper" >
+      <div className={theme} >
+        <div className="App">
+          <Layout />
         </div>
-        <Footer />
       </div>
     </div>
   );

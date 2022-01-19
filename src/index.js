@@ -4,14 +4,24 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import ThemeContext from './context';
+
+function Main(){
+  const [theme, setTheme] = React.useState('');
+
+  return (
+    <React.StrictMode>
+      <Router>
+        <ThemeContext.Provider value={{theme, setTheme}}>
+          <App />
+        </ThemeContext.Provider>
+      </Router>
+    </React.StrictMode>
+  )
+}
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Router>
-      <App />
-    </Router>
-  </React.StrictMode>,
-  
+  <Main />,
   document.getElementById('root')
 );
 

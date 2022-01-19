@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import CurrencyOutResult from '../../components/CurrencyOutResult/CurrencyOutResult';
+
 import './CurrencyRate.scss';
 
 /*
@@ -10,6 +12,14 @@ import './CurrencyRate.scss';
 */
 
 function CurrencyRate() {
+    const currencyButtons = {
+        'USD' : 'Доллару США', 
+        'EUR' : 'Евро', 
+        'UAH' : 'Гривне', 
+        'RUB' : 'Рублю', 
+        'PLN' : 'Польской злоте'
+    };
+
     const currencyType = ['USD', 'EUR', 'RUB', 'UAH', 'JPY', 'PLN', 'CAD', 'GBP'];
     const [currentRate, setCurrentRate] = React.useState({});
     const [currentRateOut, setCurrentRateOut] = React.useState({});
@@ -28,8 +38,17 @@ function CurrencyRate() {
         return localStorage.getItem(selectedCurrency) ? true : false;
     }
 
+    const getVisitDay = () => {
+        let date = new Date();
+        return `${String(date.getDate())} ${String(date.getMonth())} ${String(date.getFullYear())}`;
+    }
+
+    const checkDay = () => {
+        return (localStorage.getItem('visiteDay') === getVisitDay()) ? true : false;
+    }
+
     const getDataRate = () => {
-        if(checkCurrency()){
+        if(checkCurrency() && checkDay()){
             setCurrentRate(JSON.parse(localStorage.getItem(selectedCurrency)));
         } else {
             fetch(`https://freecurrencyapi.net/api/v2/latest?apikey=8b7fa630-2957-11ec-a01b-e14e7d20b6c2&base_currency=${selectedCurrency}`)
@@ -37,16 +56,17 @@ function CurrencyRate() {
                     return data.json();
                 })
                 .then(data => {
-                    let result = {};
-                    currencyType.map(item => result[item] = data.data[item])
+                    const result = currencyType.reduce((accumulator, item) => (
+                        {...accumulator, [item]: data.data[item] }), '');
 
                     setCurrentRate(result);
                     localStorage.setItem(selectedCurrency, JSON.stringify(result));
+                    localStorage.setItem('visiteDay', getVisitDay());
                 });
         }
     }
 
-    React.useEffect(() => {        
+    React.useMemo(() => {        
         const newCurrencyData = {};
         currencyType.map((item) => { 
             if(currentRate[item]){
@@ -60,26 +80,16 @@ function CurrencyRate() {
     const setCount = (e) => {
         setCountCurrency(+e.target.value);
     }   
-    
+
     return (
         <div className="currency">
             <button className="currenсуBtnDisabled" disabled>Получить текущий курс к</button>
-            <button onClick={getRate} className="currenсуBtn" value="USD">Доллару США</button>
-            <button onClick={getRate} className="currenсуBtn" value="EUR">Евро</button>
-            <button onClick={getRate} className="currenсуBtn" value="UAH">Гривне</button>
-            <button onClick={getRate} className="currenсуBtn" value="RUB">Рублю</button>
-            <button onClick={getRate} className="currenсуBtn" value="PLN">Польская злота</button>
+            {Object.keys(currencyButtons).map((key) => <button key={key} onClick={getRate} className="currenсуBtn" value={key}>{currencyButtons[key]}</button> )}
+            
             <div className="exchange"><span>Хочу обменять</span><input type="number" onChange={setCount} /> <span>{selectedCurrency}</span></div>
+            
             <div className="currenсуOutWrap">
-                <div className="currencyOut"> 
-                    {currentRateOut
-                    && Object.keys(currentRateOut).map((item) => 
-                        (selectedCurrency === item ? '' :
-                        <div key={item}>
-                            <div>{item}: {currentRateOut[item]}</div>
-                        </div>)) 
-                    }
-                </div>
+                <CurrencyOutResult currentRateOut={currentRateOut} selectedCurrency={selectedCurrency} />
 
                 <div className="currencyType">
                     <p>Валюты</p>
@@ -100,10 +110,11 @@ function CurrencyRate() {
 }
 
 CurrencyRate.propTypes = {
+    currencyButtons: PropTypes.object,
     currentRate: PropTypes.object,
     currentRateOut: PropTypes.object,
     selectedCurrency: PropTypes.string,
     countCurrency: PropTypes.number
 }
 
-export default CurrencyRate;
+export default React.memo( CurrencyRate );

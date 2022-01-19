@@ -1,5 +1,6 @@
 import React from 'react';
 import photo from '../../img/developer_img.jpg';
+
 import './About.scss';
 
 function About() {
